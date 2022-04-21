@@ -16,7 +16,7 @@ public class BlockScript : MonoBehaviour
         Player = GameObject.FindWithTag("Player").transform;
         Diamond = GameObject.FindWithTag("Diamond");
         FinishDoor = GameObject.FindWithTag("WillOpen");
-        direct = new Vector3(0, 0, -2);
+        direct = new Vector3(0, 0, -1);
     }
 
 
@@ -27,7 +27,7 @@ public class BlockScript : MonoBehaviour
         {
 
             Debug.Log("BANG");
-            RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+            // RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             RocketDestroyers[0].transform.position = this.gameObject.transform.position;
             RocketDestroyers[0].transform.rotation = this.gameObject.transform.rotation;
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
@@ -38,11 +38,12 @@ public class BlockScript : MonoBehaviour
     {
         if (this.gameObject.tag == "FinishPoint")
         {
-            RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+            // RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
             RocketDestroyers[0].transform.position = this.gameObject.transform.position + direct;
             RocketDestroyers[0].transform.rotation = this.gameObject.transform.rotation;
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
             FinishDoor.SetActive(false);
+            return;
         }
     }
 
@@ -67,7 +68,7 @@ public class BlockScript : MonoBehaviour
         {
             PointOne();
         }
-        if (_isCol.gameObject.tag == ("Player"))
+        if (_isCol.gameObject.tag == ("Player") && MissionCompleted == true)
         {
             FinishPoint();
         }

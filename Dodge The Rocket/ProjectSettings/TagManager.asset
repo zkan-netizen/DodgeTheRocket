@@ -11,6 +11,9 @@ TagManager:
   - FinishPoint
   - WillOpen
   - Diamond
+  - RotaryBlock
+  - LaserProtect
+  - Key
   layers:
   - Default
   - TransparentFX
