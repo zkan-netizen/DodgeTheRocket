@@ -7,7 +7,7 @@ public class RocketScript : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem _particlesystem;
-
+public static AgentGuardScript agentscript;
     [SerializeField]
     protected bool isBang; //Controller of destroy ExplosionParticleSystem
 
@@ -41,8 +41,8 @@ public class RocketScript : MonoBehaviour
         if (canLaunch == true)
         {
             _navmeshagent.speed += Time.deltaTime / 25;
-            _navmeshagent.angularSpeed += Time.deltaTime * 10;
-            _navmeshagent.acceleration += Time.deltaTime;
+            _navmeshagent.angularSpeed += Time.deltaTime * 2;
+            _navmeshagent.acceleration += Time.deltaTime*0.05f;
             _navmeshagent.SetDestination(Target.transform.position);
             _distance =
                 Vector3.Distance(transform.position, Target.transform.position);
@@ -56,10 +56,12 @@ public class RocketScript : MonoBehaviour
                         Target.transform.position);
                 if (_distance < 7)
                 {
+                   AgentGuardScript.SpotterCondition=false;
                     this._navmeshagent.speed = 4.5f;
                 }
                 else
                 {
+                    AgentGuardScript.SpotterCondition=true;
                     isBang = false;
                     this._navmeshagent.speed = 0;
                 }
