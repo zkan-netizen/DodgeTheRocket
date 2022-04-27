@@ -3,7 +3,13 @@ guid: 14324a18a2ae09c45a3cbfb555301a24
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - canvas: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - Diamond: {fileID: 808187414866765834, guid: dd9e373c497927b41965c9ee66d65c86,
+      type: 3}
+  - FinishDoor: {fileID: 808187414866765834, guid: dd9e373c497927b41965c9ee66d65c86,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

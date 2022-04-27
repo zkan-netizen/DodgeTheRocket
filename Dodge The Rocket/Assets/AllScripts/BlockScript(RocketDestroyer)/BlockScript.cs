@@ -4,14 +4,35 @@ using UnityEngine;
 
 public class BlockScript : MonoBehaviour
 {
-    [SerializeField] private Transform Player;
-    [SerializeField] private bool MissionCompleted;
-    [SerializeField] private GameObject Diamond;
-    [SerializeField] private GameObject FinishDoor;
+    [SerializeField]
+    Canvas NextLevel;
+
+    [SerializeField]
+    private Transform Player;
+
+    [SerializeField]
+    private bool MissionCompleted;
+
+    [SerializeField]
+    private GameObject Diamond;
+
+    [SerializeField]
+    private GameObject FinishDoor;
+
     Vector3 direct;
-    [SerializeField] private List<GameObject> RocketDestroyers = new List<GameObject>();
+
+    [SerializeField]
+    private List<GameObject> RocketDestroyers = new List<GameObject>();
+
+    private void Awake()
+    {
+        NextLevel.gameObject.SetActive(false);
+    }
+
     void Start()
     {
+ 
+        
         MissionCompleted = false;
         Player = GameObject.FindWithTag("Player").transform;
         Diamond = GameObject.FindWithTag("Diamond");
@@ -19,30 +40,35 @@ public class BlockScript : MonoBehaviour
         direct = new Vector3(0, 0, -1);
     }
 
-
-
     private void PointOne()
     {
         if (this.gameObject.tag == "BlockPoint")
         {
+            Debug.Log("BangOnWall");
 
-            Debug.Log("BANG");
             // RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-            RocketDestroyers[0].transform.position = this.gameObject.transform.position;
-            RocketDestroyers[0].transform.rotation = this.gameObject.transform.rotation;
+            RocketDestroyers[0].transform.position =
+                this.gameObject.transform.position;
+            RocketDestroyers[0].transform.rotation =
+                this.gameObject.transform.rotation;
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
             return;
         }
     }
+
     private void FinishPoint()
     {
         if (this.gameObject.tag == "FinishPoint")
         {
             // RocketDestroyers[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-            RocketDestroyers[0].transform.position = this.gameObject.transform.position + direct;
-            RocketDestroyers[0].transform.rotation = this.gameObject.transform.rotation;
+            RocketDestroyers[0].transform.position =
+                this.gameObject.transform.position + direct;
+            RocketDestroyers[0].transform.rotation =
+                this.gameObject.transform.rotation;
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
             FinishDoor.SetActive(false);
+
+            NextLevel.gameObject.SetActive(true);
             return;
         }
     }
@@ -52,19 +78,22 @@ public class BlockScript : MonoBehaviour
         if (Vector3.Distance(Diamond.transform.position, Player.position) < 1f)
         {
             MissionCompleted = true;
-            Debug.Log("Taken");
+            Debug.Log("DiamondTook");
             Diamond.SetActive(false);
         }
-
     }
 
     private void Update()
     {
         MissionChecker();
     }
+
     void OnTriggerEnter(Collider _isCol)
     {
-        if (_isCol.gameObject.tag == ("Rocket") || _isCol.gameObject.tag == "Agent")
+        if (
+            _isCol.gameObject.tag == ("Rocket") ||
+            _isCol.gameObject.tag == "Agent"
+        )
         {
             PointOne();
         }
@@ -72,16 +101,5 @@ public class BlockScript : MonoBehaviour
         {
             FinishPoint();
         }
-
     }
-
-
-
-
-
-
-
-
-
-
 }

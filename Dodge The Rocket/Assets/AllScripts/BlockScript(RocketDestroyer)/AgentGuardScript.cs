@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AgentGuardScript : MonoBehaviour
 {
-   public static bool SpotterCondition = true;
+    public static bool SpotterCondition = true;
 
     Vector3 startAngles = new Vector3(0, -130, 0);
 

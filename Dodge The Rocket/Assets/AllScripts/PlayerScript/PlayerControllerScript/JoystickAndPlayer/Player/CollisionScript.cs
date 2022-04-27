@@ -16,6 +16,8 @@ public class CollisionScript : MonoBehaviour
         if (_isCol.gameObject.tag == "Key")
         {
             GameObject.FindWithTag("LaserProtect").SetActive(false);
+            GameObject.FindWithTag("Key").SetActive(false);
+            Debug.Log("KeyTookLazerSystemsAreDeactive");
         }
     }
 }

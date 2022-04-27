@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14324a18a2ae09c45a3cbfb555301a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextLevel: {fileID: 0}
   Player: {fileID: 0}
   MissionCompleted: 1
   Diamond: {fileID: 0}
