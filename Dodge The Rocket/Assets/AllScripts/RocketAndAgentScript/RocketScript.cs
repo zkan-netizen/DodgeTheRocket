@@ -8,6 +8,7 @@ public class RocketScript : MonoBehaviour
     [SerializeField]
     private ParticleSystem _particlesystem;
 
+    [SerializeField]
     public static AgentGuardScript agentscript;
 
     [SerializeField]
@@ -27,8 +28,11 @@ public class RocketScript : MonoBehaviour
 
     NavMeshAgent _navmeshagent;
 
+   
+
     void Start()
     {
+        
         _navmeshagent = GetComponent<NavMeshAgent>();
 
         _particlesystem.Stop();
@@ -81,6 +85,7 @@ public class RocketScript : MonoBehaviour
         if (isBang == true && this.gameObject.tag == "Rocket")
         {
             _particlesystem.Play();
+
             if (canDestroy == true)
             {
                 isBang = false;
@@ -116,12 +121,17 @@ public class RocketScript : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
+                SoundEffectManager.PlaySound("Bang");
+                GameOverScript._callgameover.GameOverTimer();
+
                 Debug.Log("PlayerDeath");
+
                 isBang = true;
                 canDestroy = true;
             }
             if (col.gameObject.tag == "Agent")
             {
+                SoundEffectManager.PlaySound("Bang");
                 Debug.Log("AgentDestroyed");
                 isBang = true;
                 canDestroy = true;
@@ -131,7 +141,11 @@ public class RocketScript : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
+                GameOverScript._callgameover.GameOverTimer();
                 Debug.Log("CatchedPlayer");
+                SoundEffectManager.PlaySound("Catch");
+               SoundEffectManager.PlaySound(null);
+               return;
             }
         }
 #endregion
@@ -145,12 +159,18 @@ public class RocketScript : MonoBehaviour
         )
         {
             Debug.Log("BangRocketOnWall");
-
+            if (
+                this.gameObject.tag == "Rocket" //bang sound effect play only while rocket col the blocks.
+            )
+            {
+                SoundEffectManager.PlaySound("Bang");
+            }
             isBang = true;
             canDestroy = true;
             if (this.gameObject.tag == "Agent")
             {
-                _navmeshagent.speed = 0;
+                _navmeshagent.enabled = false;
+                Debug.Log("touchedwall");
             }
 
             //rotary block part
@@ -163,6 +183,7 @@ public class RocketScript : MonoBehaviour
             col.gameObject.tag == "LaserProtect"
         )
         {
+            SoundEffectManager.PlaySound("Bang");
             Debug.Log("BangOnRotaryWall");
             isBang = true;
             canDestroy = true;

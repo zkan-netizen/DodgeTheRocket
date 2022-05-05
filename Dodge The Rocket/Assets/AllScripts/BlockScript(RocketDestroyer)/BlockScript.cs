@@ -5,9 +5,6 @@ using UnityEngine;
 public class BlockScript : MonoBehaviour
 {
     [SerializeField]
-    Canvas NextLevel;
-
-    [SerializeField]
     private Transform Player;
 
     [SerializeField]
@@ -24,15 +21,10 @@ public class BlockScript : MonoBehaviour
     [SerializeField]
     private List<GameObject> RocketDestroyers = new List<GameObject>();
 
-    private void Awake()
-    {
-        NextLevel.gameObject.SetActive(false);
-    }
+   
 
     void Start()
     {
- 
-        
         MissionCompleted = false;
         Player = GameObject.FindWithTag("Player").transform;
         Diamond = GameObject.FindWithTag("Diamond");
@@ -67,15 +59,14 @@ public class BlockScript : MonoBehaviour
                 this.gameObject.transform.rotation;
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
             FinishDoor.SetActive(false);
-
-            NextLevel.gameObject.SetActive(true);
+            NextLevel.callnextlevel.NextLevelTimer();
             return;
         }
     }
 
     private void MissionChecker()
     {
-        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1f)
+        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1.5f)
         {
             MissionCompleted = true;
             Debug.Log("DiamondTook");

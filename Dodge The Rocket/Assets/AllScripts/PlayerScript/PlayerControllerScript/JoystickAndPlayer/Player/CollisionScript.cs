@@ -12,6 +12,7 @@ public class CollisionScript : MonoBehaviour
         )
         {
             Debug.Log("KillPlayerrr");
+            GameOverScript._callgameover.GameOverTimer();
         }
         if (_isCol.gameObject.tag == "Key")
         {
@@ -20,4 +21,6 @@ public class CollisionScript : MonoBehaviour
             Debug.Log("KeyTookLazerSystemsAreDeactive");
         }
     }
+
+  
 }
