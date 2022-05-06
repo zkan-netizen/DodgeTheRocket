@@ -11,8 +11,11 @@ public class CollisionScript : MonoBehaviour
             _isCol.gameObject.tag == "LaserProtect"
         )
         {
+            PlayerController.PlayerAnim.SetBool("WillDeath", true);
             Debug.Log("KillPlayerrr");
             GameOverScript._callgameover.GameOverTimer();
+        }else{
+            PlayerController.PlayerAnim.SetBool("WillDeath", false);
         }
         if (_isCol.gameObject.tag == "Key")
         {

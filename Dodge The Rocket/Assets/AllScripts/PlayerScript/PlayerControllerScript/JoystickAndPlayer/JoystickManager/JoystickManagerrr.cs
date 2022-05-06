@@ -12,7 +12,7 @@ JoystickManagerrr
     private Image JoystickCircle;
 
     [SerializeField]
-    private Image JoystickCenter;
+    public static Image JoystickCenter;
 
     private Vector2 posInput;
 

@@ -15,6 +15,7 @@ public class GameOverScript : MonoBehaviour
         _gameOver.gameObject.SetActive(true);
         Time.timeScale = 0;
         SoundEffectManager.PlaySound("Lose");
+        PlayerController.Speed=5;
     }
 
     public void GameOverTimer()

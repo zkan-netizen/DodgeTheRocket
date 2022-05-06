@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
 #region -CharacterMove-
     public CharacterController PlayerControl;
 
+    public static Animator PlayerAnim;
+
     private float inputX; //left and right argumetns
 
     private float inputZ; //forward and backward arguments
 
     [SerializeField]
-    private float Speed = 5f; // movespeed
+    public static float Speed = 5f; // movespeed
 
     [SerializeField]
     private float rotSpeed = 720; //rotation speed
@@ -28,16 +30,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerAnim = GetComponent<Animator>();
         _joystickmanager =
             GameObject.Find("JoystickCircle").GetComponent<JoystickManagerrr>();
         PlayerControl = GetComponent<CharacterController>();
-    }
-
-    public void StopCharacter()
-    {
-        inputX = 0;
-        inputZ = 0;
     }
 
     void MoveCharacter()
@@ -63,8 +59,14 @@ public class PlayerController : MonoBehaviour
         PlayerControl.Move(PlayerDirection * Time.deltaTime * Speed);
         if (inputX != 0 || inputZ != 0)
         {
-            //set run anim here
+            PlayerAnim.SetBool("StopWait", true);
         }
+        else
+        {
+            PlayerAnim.SetBool("StopWait", false);
+        }
+
+      
     }
 
     void Update()
@@ -75,11 +77,4 @@ public class PlayerController : MonoBehaviour
 #endregion
 
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Jumper1")
-        {
-            PlayerDirection.y += Mathf.Sqrt(10 * -3f * 5);
-        }
-    }
 }

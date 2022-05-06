@@ -28,11 +28,8 @@ public class RocketScript : MonoBehaviour
 
     NavMeshAgent _navmeshagent;
 
-   
-
     void Start()
     {
-        
         _navmeshagent = GetComponent<NavMeshAgent>();
 
         _particlesystem.Stop();
@@ -125,9 +122,18 @@ public class RocketScript : MonoBehaviour
                 GameOverScript._callgameover.GameOverTimer();
 
                 Debug.Log("PlayerDeath");
-
+                PlayerController.PlayerAnim.SetBool("WillDeath", true);
+                PlayerController.Speed=0;
+                
+                if(PlayerController.Speed==0){
+                    PlayerController.PlayerAnim.SetBool("StopWait",true);
+                }
+                
                 isBang = true;
                 canDestroy = true;
+                
+            }else{
+                PlayerController.PlayerAnim.SetBool("WillDeath",false);
             }
             if (col.gameObject.tag == "Agent")
             {
@@ -144,8 +150,8 @@ public class RocketScript : MonoBehaviour
                 GameOverScript._callgameover.GameOverTimer();
                 Debug.Log("CatchedPlayer");
                 SoundEffectManager.PlaySound("Catch");
-               SoundEffectManager.PlaySound(null);
-               return;
+                SoundEffectManager.PlaySound(null);
+                return;
             }
         }
 #endregion

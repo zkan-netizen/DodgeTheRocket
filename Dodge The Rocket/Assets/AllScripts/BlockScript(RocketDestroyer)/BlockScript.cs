@@ -66,7 +66,7 @@ public class BlockScript : MonoBehaviour
 
     private void MissionChecker()
     {
-        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1.5f)
+        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1.85f)
         {
             MissionCompleted = true;
             Debug.Log("DiamondTook");
