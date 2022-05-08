@@ -51,9 +51,9 @@ JoystickManagerrr
             // joystick move
             JoystickCenter.rectTransform.anchoredPosition =
                 new Vector2(posInput.x *
-                    (JoystickCenter.rectTransform.sizeDelta.x / 1f),
+                    (JoystickCenter.rectTransform.sizeDelta.x / .5f),
                     posInput.y *
-                    (JoystickCenter.rectTransform.sizeDelta.y / 1f));
+                    (JoystickCenter.rectTransform.sizeDelta.y / .5f));
         }
     }
 

@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/MainMenu/MainScene/Main Scene.unity
     guid: 8f31a74e874e83642a0bf39277bfb322
   - enabled: 1
-    path: Assets/Level1/Level1/Level1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Level1/Level1/DenemeLevel1.unity
+    guid: cc496421f2cbbab4d8cfa6930df994e5
   - enabled: 1
-    path: Assets/Level2/Level2/Level2.unity
-    guid: 68898d3ec979f9b4bbec0fa3e188d633
+    path: Assets/Level2/Level2/DenemeLevel2.unity
+    guid: f52d92d3f247e7941a71a9fb820deffe
   - enabled: 1
-    path: Assets/Level3/Level3/Level3.unity
-    guid: e09af2af5fd6a3046953e115eaacb25b
+    path: Assets/Level3/Level3/DenemeLEVEL3.unity
+    guid: 31c34305ab3818e40be760abebf61ae8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ad11b5d28a8a78445b6c05618a9922a7,
       type: 2}

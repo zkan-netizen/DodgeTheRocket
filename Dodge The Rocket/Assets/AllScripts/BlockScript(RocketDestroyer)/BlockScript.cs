@@ -21,8 +21,6 @@ public class BlockScript : MonoBehaviour
     [SerializeField]
     private List<GameObject> RocketDestroyers = new List<GameObject>();
 
-   
-
     void Start()
     {
         MissionCompleted = false;
@@ -60,13 +58,15 @@ public class BlockScript : MonoBehaviour
             RocketDestroyers.Add(GameObject.FindWithTag("RocketDestroyer"));
             FinishDoor.SetActive(false);
             NextLevel.callnextlevel.NextLevelTimer();
+            
             return;
         }
     }
 
     private void MissionChecker()
     {
-        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1.85f)
+        if (Vector3.Distance(Diamond.transform.position, Player.position) < 1.9f
+        )
         {
             MissionCompleted = true;
             Debug.Log("DiamondTook");

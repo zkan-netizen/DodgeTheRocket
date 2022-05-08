@@ -6,10 +6,12 @@ using UnityEngine.AI;
 public class RocketScript : MonoBehaviour
 {
     [SerializeField]
-    private ParticleSystem _particlesystem;
+    private Animator AgentAnim; //Agent AnimatorController
+
+    public static bool LaunchAnimator = true;
 
     [SerializeField]
-    public static AgentGuardScript agentscript;
+    private ParticleSystem _particlesystem; //Explosion Particle System
 
     [SerializeField]
     protected bool isBang; //Controller of destroy ExplosionParticleSystem
@@ -30,6 +32,7 @@ public class RocketScript : MonoBehaviour
 
     void Start()
     {
+        AgentAnim = GetComponent<Animator>();
         _navmeshagent = GetComponent<NavMeshAgent>();
 
         _particlesystem.Stop();
@@ -57,14 +60,15 @@ public class RocketScript : MonoBehaviour
                     Vector3
                         .Distance(transform.position,
                         Target.transform.position);
-                if (_distance < 7)
+                if (_distance < 7 && LaunchAnimator == true)
                 {
-                    AgentGuardScript.SpotterCondition = false;
-                    this._navmeshagent.speed = 4.5f;
+                    this._navmeshagent.speed = 4f;
+
+                    AgentAnim.SetBool("Running", true);
                 }
-                else
+                else if (_distance > 7)
                 {
-                    AgentGuardScript.SpotterCondition = true;
+                    AgentAnim.SetBool("Running", false);
                     isBang = false;
                     this._navmeshagent.speed = 0;
                 }
@@ -123,17 +127,19 @@ public class RocketScript : MonoBehaviour
 
                 Debug.Log("PlayerDeath");
                 PlayerController.PlayerAnim.SetBool("WillDeath", true);
-                PlayerController.Speed=0;
-                
-                if(PlayerController.Speed==0){
-                    PlayerController.PlayerAnim.SetBool("StopWait",true);
+                PlayerController.Speed = 0;
+
+                if (PlayerController.Speed == 0)
+                {
+                    PlayerController.PlayerAnim.SetBool("StopWait", true);
                 }
-                
+
                 isBang = true;
                 canDestroy = true;
-                
-            }else{
-                PlayerController.PlayerAnim.SetBool("WillDeath",false);
+            }
+            else
+            {
+                PlayerController.PlayerAnim.SetBool("WillDeath", false);
             }
             if (col.gameObject.tag == "Agent")
             {
@@ -147,6 +153,9 @@ public class RocketScript : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
+                LaunchAnimator = false;
+                AgentAnim.SetBool("Running", false);
+                PlayerController.PlayerAnim.SetBool("WillDeath", true);
                 GameOverScript._callgameover.GameOverTimer();
                 Debug.Log("CatchedPlayer");
                 SoundEffectManager.PlaySound("Catch");

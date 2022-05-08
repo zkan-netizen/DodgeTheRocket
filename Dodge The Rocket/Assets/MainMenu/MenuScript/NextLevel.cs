@@ -14,6 +14,7 @@ public class NextLevel : MonoBehaviour
     {
         nextlevelCanvas.gameObject.SetActive(true);
          SoundEffectManager.PlaySound("Win");
+        
     }
 
     public void NextLevelTimer()
